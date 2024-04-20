@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model unidade {
+  id                  Int               @id @default(autoincrement())
+  nome                String
+  lat                 String
+  lng                 String
+  unidade_superior_id Int?
+  active              Boolean           @default(true)
+  address             String?
+  address_number      String?
+  neighborhood        String?
+  city                String?
+  zip_code            String?
+  unidade_tipo_fk     unidade_tipo_fk[] // Adicione esta linha
+}
+
+model unidade_tipo {
+  id              Int               @id @default(autoincrement())
+  tipo            String
+  mostra_superior Boolean           @default(true)
+  unidade_tipo_fk unidade_tipo_fk[] // Adicione esta linha
+}
+
+model unidade_tipo_fk {
+  unidade_tipo_fk_id Int          @id @default(autoincrement())
+  unidade_id         Int
+  tipo_id            Int
+  unidade            unidade      @relation(fields: [unidade_id], references: [id]) // Adicione esta linha
+  tipo               unidade_tipo @relation(fields: [tipo_id], references: [id]) // Adicione esta linha
+}
