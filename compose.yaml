@@ -1,12 +1,11 @@
 services:
   app:
-    container_name: nextjs-app
+    container_name: maps-app
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
       - postgres
-
     ports:
       - 3000:3000
     develop:
@@ -24,13 +23,12 @@ services:
       - .env
     environment:
       NODE_ENV: production
-#      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT}/${POSTGRES_DB}?schema=${POSTGRES_SCHEMA}
-
+      DATABASE_URL: ${DATABASE_URL}
     networks:
       - app-network
 
   postgres:
-    container_name: postgres
+    container_name: maps_postgres
     image: postgres:15-alpine
     restart: always
     ports:
@@ -42,13 +40,15 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: maps_v2
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - maps_postgres-data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-        - app-network
+      - app-network
 
 networks:
   app-network:
+    driver: bridge
 
 volumes:
-  postgres-data:
+  maps_postgres-data:
+    driver: local
