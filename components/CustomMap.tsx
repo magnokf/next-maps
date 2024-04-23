@@ -2,8 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {Loader} from "@googlemaps/js-api-loader";
 import {getOperationalAreas, _cbmerjGeoService} from '../lib/areas_operacionais'
 import axios from 'axios';
+import prisma from "../lib/db";
 
 type MapType = google.maps.Map | null;
+
 
 // @ts-ignore
 function CustomMap({center, zoom, form, setNearestUnidade, isLoading, setIsLoading, setForm}) {
@@ -11,6 +13,7 @@ function CustomMap({center, zoom, form, setNearestUnidade, isLoading, setIsLoadi
     const [directionsRenderer, setDirectionsRenderer] = useState<google.maps.DirectionsRenderer | null>(null);
 
     async function loadMap() {
+
         const googleMaps = google.maps;
 
         const {Map} = await googleMaps.importLibrary('maps') as google.maps.MapsLibrary;

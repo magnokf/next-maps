@@ -16,6 +16,17 @@ services:
       - postgres
     networks:
       - app-network
+    develop:
+      watch:
+        - path: ./package.json
+          action: rebuild
+        - path: ./next.config.mjs
+          action: rebuild
+        - path: ./package-lock.json
+          action: rebuild
+        - path: .
+          target: /app
+          action: sync
 
   postgres:
     container_name: maps_v2
@@ -30,8 +41,8 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: maps_v2
     volumes:
-      - ./db-dump/:/var/lib/postgresql/data
-#      - init.sql:/docker-entrypoint-initdb.d/init.sql
+      - maps_postgres-data:/var/lib/postgresql/data
+      - ./db-dump/dump.sql:/docker-entrypoint-initdb.d/dump.sql
     networks:
       - app-network
 

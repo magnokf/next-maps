@@ -71,12 +71,14 @@ export default function Home() {
 
 
     useEffect(() => {
+
         navigator.geolocation.getCurrentPosition((position) => {
             setMapPosition({
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             })
         })
+
     }, [])
     // @ts-ignore
     return (

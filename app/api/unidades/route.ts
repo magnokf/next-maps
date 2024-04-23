@@ -32,7 +32,7 @@ export async function GET(request: NextRequest, response: NextResponse){
         return NextResponse.json(unidades)
     }
     catch (e){
-        console.error("Database connection failed")
+        console.error("Database connection failed aqui.....")
         await prisma.$disconnect();
     }
     //@ts-ignore
