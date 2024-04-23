@@ -39,3 +39,6 @@ next-env.d.ts
 
 # IDE
 /.idea
+
+./maps_postgres-data
+./init.sql
