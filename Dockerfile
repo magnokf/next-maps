@@ -9,9 +9,6 @@ COPY package*.json ./
 
 RUN npm install
 
-ENV NODE_ENV=production
-ENV DATABASE_URL="postgresql://postgres:postgres@postgres:5432/maps_v2"
-
 RUN npm run prisma generate
 
 # Copy the rest of the source files into the image.
