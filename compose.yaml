@@ -30,8 +30,8 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: maps_v2
     volumes:
-      - ./maps_postgres-data:/var/lib/postgresql/data
-      - ./db-dump/dump.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db-dump/:/var/lib/postgresql/data
+#      - init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
 
