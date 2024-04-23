@@ -203,28 +203,24 @@ function CustomMap({center, zoom, form, setNearestUnidade, isLoading, setIsLoadi
 
     return (
         <div>
-        <div id='map' className='h-screen w-full' >
 
-
-
-        </div>
-    {isLoading ?
-        (
-            <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-        <div className="bg-white p-4 rounded-lg flex items-center space-x-3">
-            <div
-                className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
-            <div>
-                <p className="text-gray-500">Buscando a unidade mais próxima...</p>
-                {form.tipoAtendimento == "1" && <p>Atendimento Operacional</p>}
-                {form.tipoAtendimento == "2" && <p>Legalização de Imóveis</p>}
-                {form.tipoAtendimento == "3" && <p>Regularização de Piscina</p>}
-                {form.tipoAtendimento == "4" && <p>Postos FUNESBOM - Taxa de Incêndio</p>}
-            </div>
-        </div>
-    </div>
-        ) : ('')
-    }
+            {isLoading ?
+                (
+                    <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+                        <div className="bg-white p-4 rounded-lg flex items-center space-x-3">
+                            <div
+                                className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+                            <div>
+                                <p className="text-gray-500">Buscando a unidade mais próxima...</p>
+                                {form.tipoAtendimento == "1" && <p>Atendimento Operacional</p>}
+                                {form.tipoAtendimento == "2" && <p>Legalização de Imóveis</p>}
+                                {form.tipoAtendimento == "3" && <p>Regularização de Piscina</p>}
+                                {form.tipoAtendimento == "4" && <p>Postos FUNESBOM - Taxa de Incêndio</p>}
+                            </div>
+                        </div>
+                    </div>
+                ) : ('')
+            }
         </div>
 
 

@@ -175,15 +175,16 @@ export default function Home() {
 
                 </div>
                 <div className="map-container lg:col-span-2 h-64 md:h-96 lg:h-screen border-t-4 md:border-0">
+                    <div id='map' className='h-screen w-full'/>
 
                     <CustomMap center={mapPosition} zoom={14} form={form} setForm={setForm}
                                setNearestUnidade={setNearestUnidade}
                                isLoading={isLoading} setIsLoading={setIsLoading}/>
 
 
-                {/*    <CustomMap center={mapPosition} zoom={14} form={form} setForm={setForm}*/}
-                {/*               setNearestUnidade={setNearestUnidade}*/}
-                {/*               isLoading={isLoading} setIsLoading={setIsLoading}/>*/}
+                    {/*    <CustomMap center={mapPosition} zoom={14} form={form} setForm={setForm}*/}
+                    {/*               setNearestUnidade={setNearestUnidade}*/}
+                    {/*               isLoading={isLoading} setIsLoading={setIsLoading}/>*/}
 
 
                 </div>
