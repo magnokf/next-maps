@@ -3,6 +3,7 @@ import {Loader} from "@googlemaps/js-api-loader";
 import {getOperationalAreas, _cbmerjGeoService} from '../lib/areas_operacionais'
 import axios from 'axios';
 import prisma from "../lib/db";
+import {PrismaClient} from "@prisma/client";
 
 type MapType = google.maps.Map | null;
 
@@ -30,6 +31,30 @@ function CustomMap({center, zoom, form, setNearestUnidade, isLoading, setIsLoadi
     async function getNearestUnidade(tipo: string) {
         setIsLoading(true);
         const response = await axios.get('/api/unidades');
+        if(response.data.length === 0){
+            const prisma = new PrismaClient();
+            const unidades = await prisma.unidade.findMany({
+                where: {
+                    NOT: {
+                        nome: {
+                            contains: 'FUNESBOM',
+                        }
+                    },
+                    active: true
+
+                },
+                include: {
+                    unidade_tipo_fk: {
+                        include: {
+                            tipo: true
+                        }
+                    }
+                }
+            })
+            return unidades[
+                Math.floor(Math.random() * unidades.length)
+                ];
+        }
         const data = await response.data;
 
         const unitsWithDistance = data.map((unit: { lat: string; lng: string; }) => ({

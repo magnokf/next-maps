@@ -12,8 +12,8 @@ services:
       DATABASE_URL: ${DATABASE_URL}
     ports:
       - 3000:3000
-    depends_on:
-      - postgres
+#    depends_on:
+#      - postgres
     networks:
       - app-network
     develop:
@@ -28,28 +28,34 @@ services:
           target: /app
           action: sync
 
-  postgres:
-    container_name: maps_v2
-    image: postgres:16-alpine
-    restart: always
-    ports:
-      - 5432:5432
-    env_file:
-      - .env
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: maps_v2
-    volumes:
-      - maps_postgres-data:/var/lib/postgresql/data
-      - ./db-dump/dump.sql:/docker-entrypoint-initdb.d/dump.sql
-    networks:
-      - app-network
+#  postgres:
+#    container_name: maps_v2
+#    image: postgres:16-alpine
+#    restart: always
+#    ports:
+#      - 5432:5432
+#    env_file:
+#      - .env
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#      POSTGRES_DB: maps_v2
+#    volumes:
+#      - maps_postgres-data:/var/lib/postgresql/data
+#      - ./db-dump/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+#    networks:
+#      - app-network
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U postgres"]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+
 
 networks:
   app-network:
     driver: bridge
 
-volumes:
-  maps_postgres-data:
-    driver: local
+#volumes:
+#  maps_postgres-data:
+#    driver: local
